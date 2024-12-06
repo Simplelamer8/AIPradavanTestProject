@@ -8,6 +8,7 @@ import requests
 import oauth2
 from schemas import PeopleSearch, PersonUpdate, PersonResponse, APIBinding
 from db.people import create_new_person, validate_and_search, update_person_db, delete_person_db
+import os
 
 
 router = APIRouter(
@@ -15,7 +16,7 @@ router = APIRouter(
     # tags=["People"]
 )
 
-BASE_URL = "https://randomuser.me/api/"
+BASE_URL = os.getenv("BASE_API_URL")
 
 @router.get("/get_random_person", tags=['External API call & operations with DB'])
 async def get_random_person():

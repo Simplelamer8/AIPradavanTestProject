@@ -6,13 +6,14 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from db.database import get_db
 import db.models as models
+import os
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")#The tokenUrl parameter tells the OAuth2PasswordBearer logic where the token can be gotten from. This is primarily used for the openapi.json and the automatic docs. They will show API endpoints with the little lock, and when entering your user/password it will send a POST request with those user/password credentials to the tokenUrl endpoint to collect a bearer token.
 
 # JOSE -> JS object signing and encryption
 
-SECRET_KEY = "HLrZakkjVqsSyE8KADgASD4fUZhnlFBWKlfgsJTpG4je9B8iLOLgk2i3k3xbOvkpJck="
-ALGORITHM = "HS256"
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_EXPIRE_MINUTES = 30
 
 def create_access_token(data: dict):

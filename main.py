@@ -1,10 +1,7 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI
 import db.models as models
-from db.database import engine, SessionLocal
+from db.database import engine
 from routers import user, auth, people
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import SQLAlchemyError
-from db.database import get_db
 
 
 models.Base.metadata.create_all(bind=engine)
