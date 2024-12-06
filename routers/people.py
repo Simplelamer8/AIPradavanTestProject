@@ -9,6 +9,7 @@ import oauth2
 from schemas import PeopleSearch, PersonUpdate, PersonResponse, APIBinding
 from db.people import create_new_person, validate_and_search, update_person_db, delete_person_db
 import os
+from db.people import fetch_random_person, fetch_person_nationality
 
 
 router = APIRouter(
@@ -24,9 +25,7 @@ async def get_random_person():
     ### Get random user from external API.
     """
 
-
-    response = requests.get(BASE_URL)
-    return response.json()
+    return fetch_random_person()
 
 
 @router.get("/get_random_person_and_save", tags=['External API call & operations with DB'])
@@ -36,8 +35,7 @@ async def get_random_person_and_save(db: Session = Depends(get_db)):
     """
 
 
-    response = requests.get(BASE_URL)
-    response = response.json()
+    response = fetch_random_person()
     new_person = create_new_person(response, db)
 
     return new_person
@@ -77,8 +75,7 @@ async def get_person_nationality(params: APIBinding, db: Session = Depends(get_d
     try:
         people = db.query(models.Person).filter(models.Person.nationality == params.nationality).all()
 
-        response = requests.get(BASE_URL + "/?nat=" + params.nationality)
-        response = response.json()
+        response = fetch_person_nationality(params.nationality)
 
         return {"DataFromLocalDB": people, "DataFromAPICall": response}
     except SQLAlchemyError as e:

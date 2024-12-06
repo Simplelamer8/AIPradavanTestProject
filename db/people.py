@@ -2,6 +2,21 @@ import db.models as models
 from sqlalchemy import and_
 from fastapi import HTTPException
 from sqlalchemy.exc import SQLAlchemyError
+import requests
+import os
+from schemas import APIBinding
+
+BASE_URL = os.getenv("BASE_API_URL")
+
+
+def fetch_random_person():
+    response = requests.get(BASE_URL)
+    return response.json()
+
+def fetch_person_nationality(nationality: str):
+    url = f"{BASE_URL}/?nat={nationality}"
+    response = requests.get(url)
+    return response.json()
 
 def create_new_person(response, db):
 
