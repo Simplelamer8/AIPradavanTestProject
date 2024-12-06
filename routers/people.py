@@ -11,7 +11,6 @@ from db.people import create_new_person, validate_and_search, update_person_db, 
 import os
 from db.people import fetch_random_person, fetch_person_nationality
 
-
 router = APIRouter(
     prefix="/people",
     # tags=["People"]
