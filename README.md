@@ -20,9 +20,9 @@ source .venv/bin/activate
 ### 3) Install dependencies:  
 pip install -r requirements.txt
 
-### 4) The project uses PostgreSQL as database, You need to create DB for the project with name "AIPradavan"
+### 4) The project uses deployed PostgreSQL database
 ### 5) Create enviroment variables by adding .env file to the root of the project directory and add the following variables:  
-DB_URL=Link to your local DB  
+DB_URL=postgresql://aipradavan_user:9ZQKLhpy5ju7Xu4pO4T15XYAt2cxyoQ9@dpg-ct9cekpu0jms73cp78jg-a.frankfurt-postgres.render.com/aipradavan  
 BASE_API_URL=https://randomuser.me/api/  
 SECRET_KEY = HLrZakkjVqsSyE8KADgASD4fUZhnlFBWKlfgsJTpG4je9B8iLOLgk2i3k3xbOvkpJck=  
 ALGORITHM=HS256  
